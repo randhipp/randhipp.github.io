@@ -1,0 +1,16 @@
+title: Randhi Putra
+email: hey@randhi.pro
+description: "Senior Software Developer specializing in Fullstack & AI Product Engineering"
+url: "https://randhi.pro"
+baseurl: ""
+
+permalink: /blog/:title/
+markdown: kramdown
+
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

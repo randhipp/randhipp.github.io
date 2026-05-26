@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -597,6 +599,7 @@
         <a href="#about" id="nav-about">About</a>
         <a href="#expertise" id="nav-expertise">Expertise</a>
         <a href="#experience" id="nav-experience">Experience</a>
+        <a href="#blog" id="nav-blog">Writing</a>
         <a href="#contact" id="nav-contact">Contact</a>
       </nav>
     </div>
@@ -725,6 +728,39 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- Writing Section -->
+    <section id="blog" class="fade-in-up">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Writing</h2>
+          <p class="section-subtitle">Thoughts on engineering, AI product design, and web technology.</p>
+        </div>
+        <div class="grid">
+          {% for post in site.posts %}
+            <article class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem;">
+                  {{ post.date | date: "%B %d, %Y" }} &bull; {{ post.read_time }}
+                </div>
+                <h3 class="card-title" style="margin-bottom: 0.75rem;">
+                  <a href="{{ post.url | relative_url }}" style="color: var(--text-primary); text-decoration: none; transition: var(--transition-smooth);" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='var(--text-primary)'">
+                    {{ post.title }}
+                  </a>
+                </h3>
+                <p class="card-desc" style="margin-bottom: 0;">{{ post.description }}</p>
+              </div>
+              <div style="margin-top: 1.5rem;">
+                <a href="{{ post.url | relative_url }}" style="color: var(--accent-color); text-decoration: none; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem;">
+                  Read Article
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
+          {% endfor %}
         </div>
       </div>
     </section>
