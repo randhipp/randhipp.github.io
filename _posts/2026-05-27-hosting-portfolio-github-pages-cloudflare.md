@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hosting a Portfolio with Jekyll, GitHub Pages & Cloudflare DNS"
-date: 2026-05-27 09:00:00 +0700
+date: 2026-05-27 01:00:00 +0700
 read_time: "3 min read"
 description: "A complete walkthrough of how this minimalist developer portfolio is set up using Jekyll, hosted on GitHub Pages, and mapped to a custom domain via Cloudflare."
 ---
