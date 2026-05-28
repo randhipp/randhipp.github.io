@@ -24,16 +24,23 @@ In a traditional cycle, developers spend massive amounts of time ensuring their 
 
 In the **AI + Preview-First** paradigm, we treat the local machine purely as a scratchpad for code construction, delegating all integration and verification to isolated, cloud-hosted preview environments. 
 
-```mermaid
-graph TD
-    A[1. Plan & Prompt] --> B[2. Define Contract]
-    B --> C[3. Implement & PR]
-    C --> D[4. Spin up Preview Env]
-    D --> E[5. Verify on Preview URL]
-    E --> F[6. Merge & Deploy to Prod]
-    style D fill:#f9f,stroke:#333,stroke-width:2px
-    style E fill:#bbf,stroke:#333,stroke-width:2px
-```
+> 📋 **1. Plan & Prompt**  
+> Define the scope, components, and goals.  
+> &nbsp;&nbsp;▼  
+> 📝 **2. Define Contract**  
+> Establish API payloads, DB schemas, or UI props first.  
+> &nbsp;&nbsp;▼  
+> 💻 **3. Implement & PR**  
+> Generate code to match the contract and push the Pull Request.  
+> &nbsp;&nbsp;▼  
+> 🧪 **4. Spin up Preview Env**  
+> The PR triggers the creation of a live, replica cloud environment.  
+> &nbsp;&nbsp;▼  
+> 🔍 **5. Verify on Preview URL**  
+> Test, audit, and debug directly on the preview URL. **(No local testing)**  
+> &nbsp;&nbsp;▼  
+> 🚀 **6. Merge & Deploy to Prod**  
+> Once approved, merge to main. The preview environment is torn down and production is updated.
 
 This workflow is broken down into four key steps.
 
