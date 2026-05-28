@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Death of Localhost: AI-Driven Workflows & Preview Environments"
-date: 2026-05-29 09:00:00 +0700
+date: 2026-05-29 06:00:00 +0700
 read_time: "4 min read"
 description: "How we bypassed local development setups completely by combining AI-driven code generation, API contracts, and automated preview environments for lightning-fast delivery."
 ---
