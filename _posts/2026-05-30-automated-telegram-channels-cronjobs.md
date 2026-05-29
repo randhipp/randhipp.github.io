@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How I Built 2 Automated Telegram Channels with Hermes Agent"
-date: 2026-05-30 08:00:00 +0700
+date: 2026-05-30 06:20:17 +0700
 categories: automation telegram cronjob hermes-agent
 permalink: /blog/automated-telegram-channels-cronjobs/
 ---
