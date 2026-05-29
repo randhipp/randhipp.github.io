@@ -2,7 +2,7 @@
 layout: post
 title: "Power Your AI Assistant: Configuring Custom LLMs and Telegram with Hermes Agent"
 description: "A practical guide to setting up custom LLM endpoints via the hermes model CLI and connecting Hermes Agent to Telegram for a pocket AI assistant."
-date: 2026-05-28 12:00:00 +0700
+date: 2026-05-29 12:00:00 +0700
 categories: [AI, Automation, DevTools]
 tags: [hermes-agent, llm, telegram, open-source]
 ---
