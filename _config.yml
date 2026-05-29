@@ -3,6 +3,7 @@ email: hey@randhi.pro
 description: "Senior Software Developer specializing in Fullstack & AI Product Engineering"
 url: "https://randhi.pro"
 baseurl: ""
+timezone: Asia/Bangkok
 
 permalink: /blog/:title/
 markdown: kramdown
