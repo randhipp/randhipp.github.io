@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "How I Built 2 Automated Telegram Channels with Hermes Agent"
+description: "How I automated two Telegram channels — @RemoteSWEJobs for remote software jobs and @dailygithub for trending GitHub repos — using Hermes Agent cronjobs running on my server."
 date: 2026-05-30 06:20:17 +0700
 categories: automation telegram cronjob hermes-agent
 permalink: /blog/automated-telegram-channels-cronjobs/

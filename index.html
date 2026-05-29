@@ -751,7 +751,7 @@
                     {{ post.title }}
                   </a>
                 </h3>
-                <p class="card-desc" style="margin-bottom: 0;">{{ post.description }}</p>
+                <p class="card-desc" style="margin-bottom: 0;">{% if post.description %}{{ post.description }}{% else %}{{ post.excerpt | strip_html | truncatewords: 35 }}{% endif %}</p>
               </div>
               <div style="margin-top: 1.5rem;">
                 <a href="{{ post.url | relative_url }}" style="color: var(--accent-color); text-decoration: none; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem;">
