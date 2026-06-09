@@ -17,14 +17,14 @@ Instead of spending an afternoon clicking around linkedin.com and fiddling with 
 
 The LinkedIn scraper I use — [linkedin-scraper-mcp](https://github.com/nicedouble/linkedin-scraper-mcp) (v3.4.2) — is an MCP server that wraps LinkedIn's internal API and exposes it as a set of tools: `get_my_profile`, `search_jobs`, `search_people`, `get_feed`, and about 15 others.
 
-I run it on my Mac (because it needs a logged-in Chromium session with LinkedIn cookies) and expose it to the internet via Cloudflare at `https://bs-core-api.randhi.pro/mcp`. This was the first trick: the server uses **streamable HTTP transport**, not stdio, so it needs a real web endpoint — not just a local process.
+I run it on my Mac (because it needs a logged-in Chromium session with LinkedIn cookies) and expose it to the internet via Cloudflare at `https://tunnel.randhi.pro/mcp`. This was the first trick: the server uses **streamable HTTP transport**, not stdio, so it needs a real web endpoint — not just a local process.
 
 On the Hermes side, I added this to `config.yaml`:
 
 ```yaml
 mcp_servers:
   linkedin:
-    url: "https://bs-core-api.randhi.pro/mcp"
+    url: "https://tunnel.randhi.pro/mcp"
     timeout: 120
     connect_timeout: 60
 ```
@@ -133,7 +133,7 @@ The final PDF has:
 linkedin-scraper-mcp              Hermes Agent
   │                                  │
   │  Cloudflare tunnel               │
-  │  bs-core-api.randhi.pro/mcp ←────┤ MCP config → url transport
+  │  tunnel.randhi.pro/mcp ←────┤ MCP config → url transport
   │                                  │
   │  get_my_profile ────────────────→│ Agent audits profile
   │                                  │ Agent rewrites headline/experience
