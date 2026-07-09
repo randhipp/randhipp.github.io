@@ -1,7 +1,7 @@
 ---
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,32 +23,41 @@
   <meta property="twitter:title" content="Randhi Putra — Senior Fullstack & AI Product Developer">
   <meta property="twitter:description" content="Portfolio of Randhi Putra, a Senior Software Developer specializing in Fullstack systems and AI Product Engineering.">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts + Icon -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* CSS Custom Properties / Design Tokens */
+    /* ==================== CSS Custom Properties ==================== */
     :root {
       --bg-color: #08080a;
+      --bg-secondary: #0d0d14;
       --card-bg: rgba(18, 18, 24, 0.6);
-      --card-border: rgba(255, 255, 255, 0.05);
-      --card-border-hover: rgba(129, 140, 248, 0.2);
+      --card-border: rgba(255, 255, 255, 0.06);
+      --card-border-hover: rgba(129, 140, 248, 0.25);
       --text-primary: #f3f4f6;
       --text-secondary: #9ca3af;
       --text-muted: #6b7280;
-      --accent-color: #818cf8; /* Soft Indigo */
+      --accent-color: #818cf8;      /* Soft Indigo */
       --accent-glow: rgba(129, 140, 248, 0.15);
-      --accent-teal: #2dd4bf; /* Teal */
+      --accent-teal: #2dd4bf;        /* Teal */
+      --accent-pink: #c084fc;        /* Purple */
       --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
       --max-width: 1100px;
+      --nav-height: 4.5rem;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* Reset and Base Styles */
-    * {
+    /* ==================== Reset & Base ==================== */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -56,6 +65,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
     }
 
     body {
@@ -68,70 +78,91 @@
       position: relative;
     }
 
-    /* Ambient Background Effect */
+    /* ==================== Ambient Background ==================== */
     body::before {
       content: '';
-      position: absolute;
-      top: -10%;
+      position: fixed;
+      top: -20%;
       left: -10%;
       width: 120%;
-      height: 120%;
-      background: 
-        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(45, 212, 191, 0.05) 0%, transparent 40%);
+      height: 140%;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(99, 102, 241, 0.10) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 75%, rgba(45, 212, 191, 0.06) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(192, 132, 252, 0.04) 0%, transparent 50%);
       pointer-events: none;
       z-index: -1;
+      animation: ambientPulse 8s ease-in-out infinite alternate;
     }
 
-    /* Grid Overlay */
+    @keyframes ambientPulse {
+      0%   { opacity: 0.6; transform: scale(1) translate(0, 0); }
+      100% { opacity: 1;   transform: scale(1.05) translate(2%, -2%); }
+    }
+
+    /* Subtle Grid Overlay */
     body::after {
       content: '';
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-      background-size: 50px 50px;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+      background-size: 60px 60px;
       pointer-events: none;
       z-index: -2;
     }
 
-    /* Typography */
-    h1, h2, h3, h4 {
+    /* ==================== Typography ==================== */
+    h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-heading);
       font-weight: 700;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
-    /* Layout Wrapper */
+    code, .mono {
+      font-family: var(--font-mono);
+    }
+
+    /* ==================== Layout ==================== */
     .container {
       width: 100%;
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .container { padding: 0 2rem; }
     }
 
-    /* Navigation */
+    /* ==================== Navigation ==================== */
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      height: var(--nav-height);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--card-border);
-      z-index: 100;
-      background: rgba(8, 8, 10, 0.7);
+      z-index: 1000;
+      background: rgba(8, 8, 10, 0.75);
+      transition: var(--transition-smooth);
+    }
+    header.scrolled {
+      background: rgba(8, 8, 10, 0.92);
+      border-bottom-color: rgba(129, 140, 248, 0.12);
     }
 
     .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 4.5rem;
+      height: var(--nav-height);
     }
 
     .logo {
@@ -143,32 +174,179 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      z-index: 1001;
+    }
+    .logo:hover .logo-dot {
+      box-shadow: 0 0 20px var(--accent-color);
     }
 
     .logo-dot {
       width: 8px;
       height: 8px;
-      background-color: var(--accent-color);
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-teal));
       border-radius: 50%;
       box-shadow: 0 0 10px var(--accent-color);
       display: inline-block;
+      transition: var(--transition-smooth);
     }
 
-    nav {
+    /* Desktop Nav */
+    .desktop-nav {
       display: flex;
       gap: 2rem;
+      align-items: center;
     }
-
-    nav a {
+    .desktop-nav a {
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
       transition: var(--transition-smooth);
+      position: relative;
+      padding: 0.25rem 0;
+    }
+    .desktop-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--accent-color), var(--accent-teal));
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    .desktop-nav a:hover {
+      color: var(--text-primary);
+    }
+    .desktop-nav a:hover::after {
+      width: 100%;
     }
 
-    nav a:hover {
+    /* ==================== Hamburger Menu ==================== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      z-index: 1001;
+      background: none;
+      border: none;
+      padding: 6px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition-smooth);
+    }
+    .hamburger:hover { background: rgba(255,255,255,0.04); }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: center;
+    }
+    .hamburger span:nth-child(2) { margin: 5px 0; }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile Nav Drawer */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: rgba(8, 8, 10, 0.97);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+      padding: 2rem;
+    }
+    .mobile-nav.open {
+      right: 0;
+    }
+    .mobile-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .mobile-nav.open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mobile-nav a:nth-child(1) { transition-delay: 0.1s; }
+    .mobile-nav a:nth-child(2) { transition-delay: 0.15s; }
+    .mobile-nav a:nth-child(3) { transition-delay: 0.2s; }
+    .mobile-nav a:nth-child(4) { transition-delay: 0.25s; }
+    .mobile-nav a:nth-child(5) { transition-delay: 0.3s; }
+    .mobile-nav a:nth-child(6) { transition-delay: 0.35s; }
+    .mobile-nav a:hover {
       color: var(--text-primary);
+      transform: translateX(6px);
+    }
+    .mobile-nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-nav-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ==================== Nav Resume Button ==================== */
+    .nav-resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(129, 140, 248, 0.1);
+      border: 1px solid rgba(129, 140, 248, 0.2);
+      color: var(--accent-color) !important;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      transition: var(--transition-smooth);
+    }
+    .nav-resume-btn:hover {
+      background: rgba(129, 140, 248, 0.2);
+      border-color: var(--accent-color);
+      transform: translateY(-1px);
+    }
+    .mobile-nav .nav-resume-btn {
+      font-size: 1.25rem !important;
+      padding: 0.6rem 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (min-width: 769px) {
+      .mobile-nav, .mobile-nav-overlay { display: none; }
     }
 
     /* Hero Section */
@@ -556,62 +734,630 @@
       }
     }
 
-    /* Custom Scrollbar Styles */
-    ::-webkit-scrollbar {
-      width: 8px;
+    /* ==================== Hero Section ==================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-height);
+      position: relative;
+      overflow: hidden;
     }
 
-    ::-webkit-scrollbar-track {
-      background: var(--bg-color);
+    /* Animated gradient orb behind hero */
+    .hero-orb {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(129,140,248,0.08), transparent 70%);
+      top: 10%;
+      right: -10%;
+      animation: orbFloat 12s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes orbFloat {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-40px, 30px) scale(1.1); }
+      100% { transform: translate(-20px, -20px) scale(0.95); }
     }
 
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
+    .hero-content {
+      max-width: 720px;
+      position: relative;
+      z-index: 1;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(129, 140, 248, 0.4);
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent-color);
+      margin-bottom: 1.5rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(129, 140, 248, 0.08);
+      border: 1px solid rgba(129, 140, 248, 0.15);
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+    .hero-tag .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
-    /* Scroll animations */
-    .fade-in-up {
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.08;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .hero-title-highlight {
+      background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-teal) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ==================== Buttons ==================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      transition: opacity 0.3s ease;
+    }
+    .btn:hover::after { opacity: 1; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-pink));
+      color: #fff;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(129, 140, 248, 0.3);
     }
 
-    .fade-in-up.active {
+    .btn-secondary {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .btn-secondary:hover {
+      border-color: var(--card-border-hover);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+
+    /* ==================== Section Styles ==================== */
+    section {
+      padding: 7rem 0;
+      border-bottom: 1px solid var(--card-border);
+    }
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-header {
+      margin-bottom: 4rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-title .number {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--accent-color);
+      -webkit-text-fill-color: var(--accent-color);
+    }
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* ==================== Grid / Cards ==================== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 255, 255, 0.06), transparent 40%);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--card-border-hover);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-glow);
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, rgba(129, 140, 248, 0.12), rgba(45, 212, 191, 0.08));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--accent-color);
+      border: 1px solid rgba(129, 140, 248, 0.1);
+    }
+    .card-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .card-gradient-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .card:hover .card-gradient-border {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+    .card-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .card-tags {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-family: var(--font-mono);
+      transition: var(--transition-fast);
+    }
+    .tag:hover {
+      border-color: rgba(129, 140, 248, 0.3);
+      color: var(--accent-color);
+      background: rgba(129, 140, 248, 0.06);
+    }
+
+    /* ==================== Experience Timeline ==================== */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .experience-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+    .experience-item::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 10%;
+      height: 80%;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-color), var(--accent-teal));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .experience-item:hover::before { opacity: 1; }
+    .experience-item:hover {
+      border-color: var(--card-border-hover);
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 768px) {
+      .experience-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .experience-item::before { left: 0; top: 0; width: 100%; height: 2px; }
+    }
+
+    .exp-date {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.9rem;
+      font-family: var(--font-mono);
+    }
+    .exp-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .exp-company {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .exp-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      line-height: 1.7;
+    }
+
+    /* ==================== Writing / Blog ==================== */
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .blog-date {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      margin-bottom: 0.5rem;
+    }
+    .blog-read-more {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 1.5rem;
+      transition: var(--transition-smooth);
+    }
+    .blog-read-more:hover {
+      gap: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    /* ==================== Contact Section ==================== */
+    #contact {
+      text-align: center;
+    }
+    .contact-card {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .email-container {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 2rem auto 1.5rem;
+      max-width: 100%;
+      word-break: break-all;
+      transition: var(--transition-smooth);
+    }
+    .email-container:hover {
+      border-color: rgba(129, 140, 248, 0.2);
+    }
+    .email-text {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+    .btn-copy {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+      transition: var(--transition-smooth);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .btn-copy:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(18, 18, 24, 0.92);
+      border: 1px solid var(--accent-color);
+      color: var(--text-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      font-size: 0.9rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ==================== Social Links ==================== */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .social-link {
+      color: var(--text-secondary);
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .social-link:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-color);
+      background: var(--accent-glow);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    .social-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ==================== Footer ==================== */
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+    }
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+    footer a:hover {
+      color: var(--accent-color);
+    }
+
+    /* ==================== Scrollbar ==================== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-color); }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(129, 140, 248, 0.3);
+    }
+
+    /* ==================== Scroll Animations ==================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.active {
       opacity: 1;
       transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal-scale.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Stagger children */
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .stagger.active > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger.active > *:nth-child(2) { transition-delay: 0.1s; }
+    .stagger.active > *:nth-child(3) { transition-delay: 0.15s; }
+    .stagger.active > *:nth-child(4) { transition-delay: 0.2s; }
+    .stagger.active > *:nth-child(5) { transition-delay: 0.25s; }
+    .stagger.active > *:nth-child(6) { transition-delay: 0.3s; }
+    .stagger.active > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================== Responsive ==================== */
+    @media (max-width: 768px) {
+      section { padding: 5rem 0; }
+      .section-header { margin-bottom: 2.5rem; }
+      .card { padding: 1.75rem; }
+      .email-container {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.25rem;
+      }
+      .email-text { font-size: 1rem; }
+      .contact-card { padding: 2.5rem 1.25rem; }
     }
   </style>
 </head>
 <body>
 
   <!-- Navigation Header -->
-  <header>
+  <header id="header">
     <div class="container nav-container">
       <a href="#" class="logo" id="nav-logo">
         Randhi Putra<span class="logo-dot"></span>
       </a>
-      <nav aria-label="Main Navigation">
-        <a href="#about" id="nav-about">About</a>
-        <a href="#expertise" id="nav-expertise">Expertise</a>
-        <a href="#experience" id="nav-experience">Experience</a>
-        <a href="#blog" id="nav-blog">Writing</a>
-        <a href="/randhi-putra-resume.pdf" target="_blank" id="nav-resume">Resume</a>
-        <a href="#contact" id="nav-contact">Contact</a>
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#experience">Experience</a>
+        <a href="#blog">Writing</a>
+        <a href="/randhi-putra-resume.pdf" target="_blank" class="nav-resume-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume
+        </a>
+        <a href="#contact">Contact</a>
       </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav-overlay" id="nav-overlay"></div>
+  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#expertise" class="mobile-nav-link">Expertise</a>
+    <a href="#experience" class="mobile-nav-link">Experience</a>
+    <a href="#blog" class="mobile-nav-link">Writing</a>
+    <a href="/randhi-putra-resume.pdf" target="_blank" class="nav-resume-btn mobile-nav-link">Resume</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+  </div>
 
   <!-- Hero Section -->
   <main>
     <section class="hero" id="home">
+      <div class="hero-orb"></div>
       <div class="container">
         <div class="hero-content">
-          <div class="hero-tag">Senior Software Developer</div>
+          <div class="hero-tag"><span class="dot"></span> Senior Software Developer</div>
           <h1>Crafting <span class="hero-title-highlight">Fullstack</span> Systems &amp; <span class="hero-title-highlight">AI Products</span></h1>
           <p>I build high-performance backend infrastructures, modern web frontends, and robust AI integrations that connect large language models with production systems.</p>
           <div class="cta-group">
@@ -623,10 +1369,10 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="fade-in-up">
+    <section id="about" class="reveal">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">About Me</h2>
+          <h2 class="section-title"><span class="number">01.</span> About Me</h2>
           <p class="section-subtitle">Bridging the gap between robust engineering and AI innovation.</p>
         </div>
         <div class="grid">
@@ -643,16 +1389,17 @@
     </section>
 
     <!-- Focus Areas / Expertise -->
-    <section id="expertise" class="fade-in-up">
+    <section id="expertise" class="reveal">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Expertise</h2>
+          <h2 class="section-title"><span class="number">02.</span> Expertise</h2>
           <p class="section-subtitle">Core focus areas that define my professional work.</p>
         </div>
-        <div class="grid">
+        <div class="grid stagger" id="expertise-grid">
           
           <!-- Card 1: Fullstack Systems -->
           <div class="card">
+            <div class="card-gradient-border"></div>
             <div class="card-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
             </div>
@@ -670,6 +1417,7 @@
 
           <!-- Card 2: AI Integrations -->
           <div class="card">
+            <div class="card-gradient-border"></div>
             <div class="card-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
             </div>
@@ -686,6 +1434,7 @@
 
           <!-- Card 3: System Performance -->
           <div class="card">
+            <div class="card-gradient-border"></div>
             <div class="card-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
             </div>
@@ -705,13 +1454,13 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="fade-in-up">
+    <section id="experience" class="reveal">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Experience</h2>
+          <h2 class="section-title"><span class="number">03.</span> Experience</h2>
           <p class="section-subtitle">A brief overview of my professional timeline.</p>
         </div>
-        <div class="experience-list">
+        <div class="experience-list stagger" id="experience-list">
           
           <div class="experience-item">
             <div class="exp-date">2024 — Present</div>
@@ -734,17 +1483,18 @@
     </section>
 
     <!-- Writing Section -->
-    <section id="blog" class="fade-in-up">
+    <section id="blog" class="reveal">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Writing</h2>
+          <h2 class="section-title"><span class="number">04.</span> Writing</h2>
           <p class="section-subtitle">Thoughts on engineering, AI product design, and web technology.</p>
         </div>
-        <div class="grid">
+        <div class="grid stagger" id="blog-grid">
           {% for post in site.posts %}
-            <article class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <article class="card blog-card">
+              <div class="card-gradient-border"></div>
               <div>
-                <div style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem;">
+                <div class="blog-date">
                   {{ post.date | date: "%B %d, %Y" }} &bull; {{ post.read_time }}
                 </div>
                 <h3 class="card-title" style="margin-bottom: 0.75rem;">
@@ -754,12 +1504,10 @@
                 </h3>
                 <p class="card-desc" style="margin-bottom: 0;">{% if post.description %}{{ post.description }}{% else %}{{ post.excerpt | strip_html | truncatewords: 35 }}{% endif %}</p>
               </div>
-              <div style="margin-top: 1.5rem;">
-                <a href="{{ post.url | relative_url }}" style="color: var(--accent-color); text-decoration: none; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem;">
-                  Read Article
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-              </div>
+              <a href="{{ post.url | relative_url }}" class="blog-read-more">
+                Read Article
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
             </article>
           {% endfor %}
         </div>
@@ -767,11 +1515,11 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="fade-in-up">
+    <section id="contact" class="reveal">
       <div class="container contact">
         <div class="card contact-card">
-          <div class="hero-tag" style="margin-bottom: 1rem;">Let's Connect</div>
-          <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Start a Conversation</h2>
+          <div class="hero-tag" style="margin-bottom: 1rem; justify-content: center;"><span class="dot"></span> Let's Connect</div>
+          <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 1rem; justify-content: center;">Start a Conversation</h2>
           <p class="section-subtitle">Interested in collaborating, hiring, or discussing AI and fullstack systems?</p>
           
           <div class="email-container">
@@ -804,7 +1552,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; <span id="year"></span> Randhi Putra. All rights reserved.</p>
+      <p>&copy; <span id="year"></span> Randhi Putra. Built with <a href="https://github.com/randhipp/randhipp.github.io" target="_blank" rel="noopener noreferrer">craft &amp; code</a>.</p>
     </div>
   </footer>
 
@@ -812,46 +1560,64 @@
   <div class="toast" id="copy-toast" role="alert" aria-live="polite">Email address copied to clipboard!</div>
 
   <script>
-    // Set current year in footer
+    // ==================== Current Year ====================
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Clipboard Copy Functionality
+    // ==================== Hamburger Menu ====================
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const navOverlay = document.getElementById('nav-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function toggleMenu(open) {
+      const isOpen = open !== undefined ? open : !hamburger.classList.contains('active');
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      mobileNav.classList.toggle('open', isOpen);
+      navOverlay.classList.toggle('show', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', () => toggleMenu());
+    navOverlay.addEventListener('click', () => toggleMenu(false));
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+
+    // ==================== Header Scroll Effect ====================
+    const header = document.getElementById('header');
+    let lastScrollY = 0;
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      header.classList.toggle('scrolled', scrollY > 50);
+      lastScrollY = scrollY;
+    }, { passive: true });
+
+    // ==================== Clipboard Copy ====================
     const btnCopy = document.getElementById('btn-copy-email');
     const emailAddr = document.getElementById('email-addr').textContent;
     const toast = document.getElementById('copy-toast');
     const copyIcon = document.getElementById('copy-icon');
-
-    // Original SVG path for copy icon
     const originalIconSvg = copyIcon.innerHTML;
-    // Success checkmark SVG path
     const checkmarkSvg = '<polyline points="20 6 9 17 4 12"></polyline>';
 
     btnCopy.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(emailAddr);
-        
-        // Visual feedback on button
         copyIcon.innerHTML = checkmarkSvg;
         btnCopy.style.color = 'var(--accent-teal)';
-        btnCopy.style.borderColor = 'var(--accent-teal)';
-        
-        // Show Toast
         toast.classList.add('show');
-        
-        // Reset after 2.5 seconds
         setTimeout(() => {
           copyIcon.innerHTML = originalIconSvg;
           btnCopy.style.color = '';
-          btnCopy.style.borderColor = '';
           toast.classList.remove('show');
         }, 2500);
-
       } catch (err) {
         console.error('Failed to copy text: ', err);
-        // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = emailAddr;
-        textArea.style.position = 'fixed'; // prevent scrolling to bottom
+        textArea.style.position = 'fixed';
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
@@ -866,7 +1632,7 @@
       }
     });
 
-    // Spotlight effect for cards
+    // ==================== Spotlight Effect for Cards ====================
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
       card.addEventListener('mousemove', e => {
@@ -878,22 +1644,33 @@
       });
     });
 
-    // Fade-in reveal animations on scroll
-    const fadeEls = document.querySelectorAll('.fade-in-up');
-    const revealOnScroll = () => {
-      const triggerBottom = window.innerHeight * 0.85;
-      fadeEls.forEach(el => {
-        const elTop = el.getBoundingClientRect().top;
-        if (elTop < triggerBottom) {
+    // ==================== Scroll Reveal Animations ====================
+    const revealEls = document.querySelectorAll('.reveal, .stagger');
+    const staggerEls = document.querySelectorAll('.stagger');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          // Don't unobserve so re-visits re-trigger
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Also reveal elements that are already visible on load
+    setTimeout(() => {
+      revealEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
           el.classList.add('active');
         }
       });
-    };
-
-    
-    window.addEventListener('scroll', revealOnScroll);
-    // Initial run to reveal elements already in view
-    revealOnScroll();
+    }, 100);
   </script>
 </body>
 </html>
